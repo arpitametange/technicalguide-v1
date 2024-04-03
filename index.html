@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload White Paper</title>
+</head>
+<body>
+    <h2>Upload White Paper</h2>
+    <form action="pdf-process-save.php" method="post" enctype="multipart/form-data">
+        <label for="campaignId">Campaign ID:</label><br>
+        <input type="text" id="campaignId" name="campaignId"><br><br>
+
+        <label for="campaignName">Campaign Name:</label><br>
+        <input type="text" id="campaignName" name="campaignName"><br><br>
+
+        <label for="uniqueId">Unique ID:</label><br>
+        <input type="text" id="uniqueId" name="uniqueId"><br><br>
+
+        <label for="summarizedContent">Summarized Content:</label><br>
+        <textarea id="summarizedContent" name="summarizedContent" rows="5" cols="50"></textarea><br><br>
+
+        <label for="whitepaperHeading">Whitepaper Heading:</label><br>
+        <input type="text" id="whitepaperHeading" name="whitepaperHeading"><br><br>
+
+        <label for="file">Select White Paper (PDF only):</label><br>
+        <input type="file" id="file" name="file"><br><br>
+
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>
