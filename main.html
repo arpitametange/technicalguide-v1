@@ -1,0 +1,128 @@
+
+<div style="color: #759fe9; margin-top: 10px;"><mat-progress-bar *ngIf="isLoading" [value]="progressValue"></mat-progress-bar>
+</div>
+<div  *ngIf="selectedUserDetails; else blankTable">
+  <!-- User details -->
+  <div style="border: 0.5px grey;margin: 20px;" class="shadow">
+     <h2 class="h2">
+        <div class="table-row__img"></div>
+        {{ selectedUserDetails.userDetails.First_Name }} {{ selectedUserDetails.userDetails.last_name }}
+     </h2>
+     <span class="span">{{ selectedUserDetails.userDetails.job_title }} at 
+     <span style="color: blue;">{{ selectedUserDetails.userDetails.company_name }}</span>
+     </span>
+     <mat-divider></mat-divider>
+     <div class="div">
+        <div style="display:flex; flex-direction: row;">
+           <td data-column="Quick Action" class="table-row__td">
+              <p class="table-row__p-status"></p>
+             
+<div *ngIf="getStoredValidationStatus(selectedUserDetails.userDetails.email_address) !== null && getStoredValidationStatus(selectedUserDetails.userDetails.email_address) !== undefined"  style="width: 200px">
+  
+   <p class="table-row__p-status status--green status"   *ngIf="getStoredValidationStatus(selectedUserDetails.userDetails.email_address) === 'VALID'">
+   
+         <span class="material-symbols-outlined" style="color: #6cdb56;">
+            verified
+            </span>
+            Verified email
+         {{ selectedUserDetails.userDetails.email_address }} 
+   </p>
+   <p class="table-row__p-status status--red status" *ngIf="getStoredValidationStatus(selectedUserDetails.userDetails.email_address) === 'INVALID'">
+      <span class="material-symbols-outlined" style="color:#e36767 ;">
+         unsubscribe
+         </span> Unverified email <span>{{ selectedUserDetails.userDetails.email_address }} </span>
+   </p>
+   <p class="table-row__p-status status--blue status" *ngIf="getStoredValidationStatus(selectedUserDetails.userDetails.email_address) === 'UNKNOWN'">
+      <span class="material-symbols-outlined" style="color: #3fd2ea;">
+         person_cancel
+         </span> Unknown <span>{{ selectedUserDetails.userDetails.email_address }} </span>
+   </p>
+   <p class="table-row__p-status status--yellow status" *ngIf="getStoredValidationStatus(selectedUserDetails.userDetails.email_address) === 'ACCEPT_ALL'">
+      <span class="material-symbols-outlined" style="color: #ecce4e;">
+         done_outline
+         </span>  Accept all <span>{{ selectedUserDetails.userDetails.email_address }}</span>
+   </p>
+   <p *ngIf="getStoredValidationStatus(selectedUserDetails.userDetails.email_address) === null">
+       Email Not available <span>{{ selectedUserDetails.userDetails.email_address }} </span>
+   </p>
+</div>
+<ng-container *ngIf="getStoredValidationStatus(selectedUserDetails.userDetails.email_address) === null || getStoredValidationStatus(selectedUserDetails.userDetails.email_address) === undefined">
+<button 
+    class="btn"
+    (click)="validateEmail(selectedUserDetails.userDetails.email_address, selectedUserDetails.userDetails)"
+>
+    <span *ngIf="showButton" role="status" aria-hidden="false"></span>
+    <span aria-hidden="true" ><img src="https://app.datagateway.in/image/letter.png" width="32px" height="50px" alt=""> Access Email</span>
+
+</button> 
+</ng-container>
+           </td>
+           <i class="fa-solid fa-phone fa-xs mx-2" style="color: #759fe9;"></i>   
+         
+           {{selectedUserDetails.userDetails.Telephone_Number }}
+        </div>
+        <mat-divider></mat-divider>
+     </div>
+     <div class="shadow" style="border: 0.5px; margin: 20px;">
+        <span style="margin-top: 30px; margin-bottom: 30px; margin-left: 100px; font-weight: bold; color: rgb(68, 68, 196);">
+        <img class="table-row__imgg " src="https://logo.clearbit.com/{{selectedUserDetails.userDetails.company_domain}}" alt="img">  
+        {{ selectedUserDetails.userDetails.company_name  | uppercase }}</span>
+        <!-- Other company details -->
+        <div class="span">
+           <!-- Links -->
+           <span style=" padding-top: 2px; margin-left: 60px; ">
+           <span class="fa-stack fa-lg">
+           <a href="https://www.{{selectedUserDetails.userDetails.company_domain}}" target="_blank">  
+           <i class="fa fa-square-o fa-stack-2x"></i>
+           <i class="fa-solid fa-link fa-l m-2" style="margin-left: 15px;"></i>
+           </a>
+           </span>
+           </span> 
+           <span class="fa-stack fa-lg " >
+           <a href="{{selectedUserDetails.userDetails.Company_Link}}" target="_blank">  
+           <i class="fa fa-square-o fa-stack-2x"></i>
+           <i class="fa-brands fa-linkedin-in " style="color: #467bca; margin-left: 15px;"></i>
+           </a>
+           </span>
+        </div>
+        <!-- Industry and Employee Size -->
+        <div class="row">
+           <span style="font-weight: bold;" class="col-6">Industry</span>
+           <span style="font-weight: bold;" class="col-6">Employees</span>
+        </div>
+        <div class="row">
+           <span class="col-1">{{ selectedUserDetails.userDetails.Industry }}</span>
+           <span class="col-6" style="margin-left: 155px;">{{ selectedUserDetails.userDetails.Employee_Size }}</span>
+        </div>
+     </div>
+  </div>
+</div>
+<ng-template  #blankTable>>
+  <p>Data not found</p>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <ul *ngIf="selectedUserDetails">
+        <li><strong>Name:</strong> {{ selectedUserDetails.userDetails.First_Name }} {{ selectedUserDetails.userDetails.last_name }}</li>
+        <li><strong>Email:</strong> {{ selectedUserDetails.userDetails.email_address }}</li>
+        <li><strong>Company:</strong> {{ selectedUserDetails.userDetails.company_name }}</li>
+        <li><strong>Job Title:</strong> {{ selectedUserDetails.userDetails.job_title }}</li>
+        <li><strong>Location:</strong> {{ selectedUserDetails.userDetails.city }}, {{ selectedUserDetails.userDetails.country }}</li>
+        <li><strong>Employee Size:</strong> {{ selectedUserDetails.userDetails.Employee_Size }}</li>
+        <li><strong>Industry:</strong> {{ selectedUserDetails.userDetails.Industry }}</li>
+      
+    </ul> -->
